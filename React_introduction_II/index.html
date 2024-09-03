@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            border: 1px solid;
+            padding: 10px;
+            width: 50%;
+
+        }
+
+        .main img {
+            width: 100%;
+            height: 400px;
+        }
+
+        
+
+       
+
+       
+
+        .watchDsecription >:nth-child(1){
+            color: rgb(169, 210, 245);
+        }
+
+        
+
+       
+
+        .features h1{
+            color: goldenrod;
+        }
+
+        .features1 {
+         border-top: 1px solid rgb(141, 141, 234);
+            display: flex;
+            gap: 50px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;  
+        }
+
+        .no-dots{
+            list-style-type: none;
+        }
+
+        .details{
+            border-top: 1px solid rgb(141, 141, 234);
+        }
+
+
+        .details h1{
+            color: goldenrod;
+        }
+
+        .addtocart > button{
+            background-color: black;
+            color: white;
+            width: 100%;
+        }
+
+        .delivery{
+            text-align: center;
+        }
+
+        span{
+            font-weight: 100;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+</body>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+    function DashBoard() {
+        return (
+            <>
+                <div className="main">
+                    <img src="https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dw7646cf71/images/Titan/Catalog/90140QM03_1.jpg?sw=600&sh=600" alt="watch" />
+                    <div className="watchname">
+                        <h1>Automatic Watch</h1>
+                        <p>$350.00 USD</p>
+                    </div>
+
+                    <div className="watchDsecription">
+                        <div>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque pariatur provident distinctio .</p>
+                        </div>
+
+                        <div>
+                            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab natus quisquam illum, unde sapiente possimus veniam cum nemo, ipsum porro ducimus rerum.</h2>
+                        </div>
+                    </div>
+
+                    <div className="features">
+                        <h1>FEATURES</h1>
+                        <div className="features1">
+                            <div>
+                                <ul className="no-dots">
+                                    <li>Chronograph</li>
+                                    <li>Master Chronometer Certified</li>
+                                    <li>Tachymeter</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <ul className="no-dots">
+                                    <li>Anti-magnetic</li>
+                                    <li>Chronometer</li>
+                                    <li>Small seconds</li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div className="details">
+                        <h1>PRODUCT DETAILS</h1>
+                        <div>
+                            <h2>Between lugs:<span> 20 mm</span></h2>
+                            <h2>Bracelet:<span> leather strap</span></h2>
+                            <h2>Case:<span> Steel</span></h2>
+                            <h2>Case Diameter:<span> 42 mm</span></h2>
+                            <h2>Dial color:<span> Black</span></h2>
+                            <h2>Crystal:<span> Domed, sractch-resistant Crystal with anti-reflective tretment inside</span></h2>
+                            <h2>Water resistance:<span> 5 bar (50 metres/167 feet)</span></h2>
+
+                        </div>
+
+                    </div>
+
+                    <div className="addtocart">
+                        <button>ADD TO CART</button>
+                    </div>
+
+                    <div className="delivery">
+                        <p>2-3 business days delivery</p>
+                    </div>
+
+                </div>
+
+
+            </>
+        )
+    }
+
+
+
+    function App() {
+        return <DashBoard />
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+
+
+</script>
+
+</html>
