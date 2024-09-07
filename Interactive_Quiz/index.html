@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+   
+   function Quiz() {
+      const questions = [
+        {
+          question: "What city is known as The Eternal City",
+          options: ["Paris", "London", "Rome", "Berlin"],
+          correctAnswer: "Rome"
+        },
+        {
+          question: "How many stars are on the Chinese flag?",
+          options: ["3", "4", "5", "6"],
+          correctAnswer: "5"
+        },
+        {
+          question: "What is the capital of Ireland?",
+          options: ["Dublin", "London", "Rome", "Berlin"],
+          correctAnswer: "Dublin"
+        }
+      ];
+
+     
+      const [answers, setAnswers] = React.useState(Array(questions.length).fill(""));
+      const [score, setScore] = React.useState(null);
+      const [isSubmitted, setIsSubmitted] = React.useState(false);
+
+      
+      const handleAnswerChange = (index, selectedOption) => {
+        const newAnswers = [...answers];
+        newAnswers[index] = selectedOption;
+        setAnswers(newAnswers);
+      };
+
+      
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        let calculatedScore = 0;
+        answers.forEach((answer, index) => {
+          if (answer === questions[index].correctAnswer) {
+            calculatedScore++;
+          }
+        });
+        setScore(calculatedScore);
+        setIsSubmitted(true);
+      };
+
+     
+      const handleRestart = () => {
+        setAnswers(Array(questions.length).fill(""));
+        setScore(null);
+        setIsSubmitted(false);
+      };
+
+      return (
+        <div className="quiz-container">
+          {!isSubmitted ? (
+            <form onSubmit={handleSubmit}>
+              {questions.map((q, index) => (
+                <div key={index} className="question">
+                  <p>{q.question}</p>
+                  <div className="options">
+                    {q.options.map((option) => (
+                      <label key={option}>
+                        <input
+                          type="radio"
+                          name={`question-${index}`}
+                          value={option}
+                          checked={answers[index] === option}
+                          onChange={() => handleAnswerChange(index, option)}
+                        />
+                        {option}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <button type="submit">Submit</button>
+            </form>
+          ) : (
+            <div>
+              <p className="score">Your Score: {score} / {questions.length}</p>
+              <button onClick={handleRestart}>Restart Quiz</button>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function App() {
+      return <Quiz />;
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+
+
+  </script>
+</html>
