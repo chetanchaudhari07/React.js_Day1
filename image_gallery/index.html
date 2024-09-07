@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic List Rendering</title>
+    <script src="https://kit.fontawesome.com/f88b623e7a.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+            position: relative;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            transition: max-height 0.3s ease;
+        }
+
+        .navbar li {
+            margin-right: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .gallery {
+            border: 1px solid;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+        }
+
+        .box {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 10px;
+            width: 200px;
+        }
+
+        .box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .box h1 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .box p {
+            font-size: 16px;
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+                background-color: #333;
+                max-height: 0;
+                overflow: hidden;
+                width: 100%;
+                position: absolute;
+                top: 50px;
+                left: 0;
+            }
+
+            .navbar.open ul {
+                max-height: 200px;
+            }
+
+            .navbar li {
+                margin: 10px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .gallery {
+                border: 1px solid;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 20px;
+                max-height: 80vh;
+                overflow-y: scroll;
+                
+
+            }
+
+            .box {
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                text-align: center;
+                padding: 10px;
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        function NavBar() {
+            const [isOpen, setIsOpen] = React.useState(false);
+
+            const toggleMenu = () => {
+                setIsOpen(!isOpen);
+            };
+
+            return (
+                <div className={`navbar ${isOpen ? 'open' : ''}`}>
+                    <div className="hamburger" onClick={toggleMenu}>
+                        <i className="fa-solid fa-bars"></i>
+                    </div>
+                    <ul>
+                        <li><i className="fa-solid fa-house"></i> Home</li>
+                        <li><i className="fa-solid fa-images"></i> Gallery</li>
+                        <li><i className="fa-solid fa-envelope"></i> Contact</li>
+                        <li><i className="fa-solid fa-user"></i> About</li>
+                    </ul>
+                </div>
+            );
+        }
+
+        function Box({ title, price }) {
+            return (
+                <div className="box">
+                    <img src="https://via.placeholder.com/150" alt={title} />
+                    <h1>{title}</h1>
+                    <p>Price: ${price}</p>
+                </div>
+            );
+        }
+
+        function App() {
+            const galleryItems = [
+                { title: 'Item 1', price: 10 },
+                { title: 'Item 2', price: 15 },
+                { title: 'Item 3', price: 20 },
+                { title: 'Item 4', price: 25 },
+                { title: 'Item 5', price: 30 },
+                { title: 'Item 6', price: 35 },
+                { title: 'Item 1', price: 10 },
+                { title: 'Item 2', price: 15 },
+                { title: 'Item 3', price: 20 },
+                { title: 'Item 4', price: 25 },
+                { title: 'Item 5', price: 30 },
+                { title: 'Item 6', price: 35 },
+                { title: 'Item 1', price: 10 },
+                { title: 'Item 2', price: 15 },
+                { title: 'Item 3', price: 20 },
+                { title: 'Item 4', price: 25 },
+                { title: 'Item 5', price: 30 },
+                { title: 'Item 6', price: 35 },
+                { title: 'Item 1', price: 10 },
+                { title: 'Item 2', price: 15 },
+                { title: 'Item 3', price: 20 },
+                { title: 'Item 4', price: 25 },
+                { title: 'Item 5', price: 30 },
+                { title: 'Item 6', price: 35 },
+                { title: 'Item 1', price: 10 },
+                { title: 'Item 2', price: 15 },
+                { title: 'Item 3', price: 20 },
+                { title: 'Item 4', price: 25 },
+                { title: 'Item 5', price: 30 },
+                { title: 'Item 6', price: 35 },
+                { title: 'Item 1', price: 10 },
+                { title: 'Item 2', price: 15 },
+                { title: 'Item 3', price: 20 },
+                { title: 'Item 4', price: 25 },
+                { title: 'Item 5', price: 30 },
+                { title: 'Item 6', price: 35 },
+            ];
+
+            return (
+                <div>
+                    <NavBar />
+                    <div className="gallery">
+                        {galleryItems.map((item, index) => (
+                            <Box key={index} title={item.title} price={item.price} />
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<App />)
+
+
+
+    </script>
+</body>
+
+</html>
