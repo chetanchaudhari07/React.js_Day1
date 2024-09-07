@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components in React</title>
+
+    <style>
+
+        .bigbox{
+          
+           height: 400px;
+           width: 60%;
+           background-color: rgb(208, 205, 205);
+          
+           
+
+        }
+
+        .Box{
+           
+            width: 300px;
+            padding: 10px;
+            
+        }
+        .Box1{
+            
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+
+
+        h1 {
+          text-align: center;
+        }
+        span{
+            color: aquamarine;
+            border-bottom: 5px solid;
+           
+        }
+
+        button{
+            background-color: aquamarine;
+            border-style: none;
+            border-radius: 3px;
+            margin-left: 50%;
+            width: 30px;
+            height: 30px;
+        }
+       
+       
+    </style>
+
+</head>
+
+
+<body>
+    <div id="root"></div>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        function Box({ button, title, description }) {
+            return (
+                
+              <div className = "Box">
+
+                
+                    <button>{button}</button>
+                    <h1>{title}</h1>
+                    <p>{description}</p>
+                
+                
+                </div>
+            )
+        }
+
+
+        function App() {
+            return (
+                <div className="bigbox">
+                    <h1>Getting started in <span>3 easy steps</span></h1>
+
+                    <div className = "Box1">
+                    <Box button="01" title="Find your template" description="Every template is embedded within an iframe, so you can easily check what they look like and test the responsive behavoiur" />
+                    <Box button="02" title="Copy the code" description="Click the code tab to see the actual source code of the template. Copy and paste it into your project and adjust it to your needs." />
+                    <Box button="03" title="Enjoy your free time" description="You've just saved yourself a bunch of time ont building the same stuff over and over again. Enjoy your free time, and build business feartures" />
+                     </div>
+
+                </div>
+            )
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<App />)
+
+
+    </script>
+</body>
+
+</html>
