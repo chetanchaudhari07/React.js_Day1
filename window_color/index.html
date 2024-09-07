@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic List Rendering</title>
+  <style>
+     .color-preview {
+      width: 100px;
+      height: 100px;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <div id="root"></div>
+
+
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+   
+function ColorInput(){
+  const [color,setColor] = React.useState('');
+  const [isValid, setIsValid] = React.useState(true);
+
+  const handleChange = (e) =>{
+    const value = e.target.value;
+    setColor(value);
+
+    const hexPattern = /^#([0-9A-F]{3}){1,2}$/i;
+    setIsValid(hexPattern.test(value));
+ };
+ return(
+    <div>
+        <input type = "text" value={color} onChange = {handleChange}
+        placeholder = "#FFFFFF" maxLength = "7" />
+
+        {!isValid && color.length > 0 && (
+            <p className="error">Invalid HEX color code</p>
+          )}
+          <div
+            className="color-preview"
+            style={{ backgroundColor: isValid ? color : 'transparent' }}
+          ></div>
+
+
+        </div>
+ )
+}
+   
+
+function App() {
+       return <ColorInput/>  
+    }
+    
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+
+
+
+  </script>
+</body>
+</html>
