@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Template</title>
+  <style>
+   
+  </style>
+</head>
+
+<body>
+
+  <div id="root"></div>
+</body>
+
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+  function DynamicForm() {
+    const [hobbies, setHobbies] = React.useState(['']);
+
+    const handleInputChange = (index, value) => {
+      const newHobbies = [...hobbies];
+      newHobbies[index] = value;
+      setHobbies(newHobbies);
+    };
+
+    const handleAddField = () => {
+      setHobbies([...hobbies, '']);
+
+    };
+
+    const handleRemoveField = (index) => {
+      if (hobbies.length > 1) {
+        const newHobbies = hobbies.filter((_, i) => i !== index);
+        setHobbies(newHobbies);
+      }
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(hobbies);
+    }
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <h3>Enter Your Hobbies</h3>
+        {hobbies.map((hobby, index) => (
+          <div key={index} className="hobby-input">
+            <input
+              type="text"
+              value={hobby}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+              placeholder="Enter a hobby"
+              required
+            />
+            {index > 0 && (
+              <button type="button" onClick={() => handleRemoveField(index)}>Remove</button>
+            )}
+          </div>
+        ))}
+        <button type="button" onClick={handleAddField}>Add Hobby</button>
+        <button type="submit">Submit</button>
+      </form>
+
+    );
+
+  }
+
+
+  function App() {
+    return <DynamicForm />
+  }
+
+  const root = ReactDOM.createRoot(document.getElementById("root"))
+  root.render(<App />)
+
+
+
+</script>
+
+</html>
