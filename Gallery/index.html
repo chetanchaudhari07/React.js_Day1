@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic List Rendering</title>
+  <style>
+    .gallery{
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(150px,1fr ));
+        gap: 10px;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+   
+
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+   function Gallery({children}){
+    return <div className = "gallery">{children}</div>
+   }
+
+   function Image({ src, alt }) {
+      return <img src={src} alt={alt} />;
+    }
+
+
+function App() {
+       return <div>
+        <Gallery >
+            <Image src ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMrpvs8dNZP3ZJeYrwx7IHl6AvZ12r7N7ehw&s" alt = "" />
+            <Image src ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSml8KQp4QTybpich8JeiUcDP7F0ZA4KzIsfQ&s" alt = "" />
+            <Image src ="https://www.hindustantimes.com/ht-img/img/2023/12/24/900x1600/NASA_Webb_1703417453422_1703417453657.jpg" alt = "" />
+            <Image src ="https://i.pinimg.com/236x/a1/dd/35/a1dd359eb5f767b91d85bd2e5029d4af.jpg" alt = "" />
+            </ Gallery >  
+        </div>
+        
+    }
+    
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+
+
+
+  </script>
+</body>
+</html>
