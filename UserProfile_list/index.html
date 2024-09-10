@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      input[type="text"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: block;
+      }
+      .user-profile {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fafafa;
+      }
+      .user-profile img {
+        border-radius: 50%;
+        margin-right: 15px;
+      }
+      .user-info {
+        flex-grow: 1;
+      }
+      .user-info h4 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: normal;
+      }
+      .user-info p {
+        margin: 5px 0 0;
+        color: #666;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+function UserProfile({ user }) {
+        return (
+          <div className="user-profile">
+            <img src={user.avatar} alt={user.name} width="50" height="50" />
+            <div className="user-info">
+              <h4>{user.name}</h4>
+              <p>{user.email}</p>
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        const [searchTerm, setSearchTerm] = React.useState('');
+        const users = [
+          { id: 1, name: 'chetan', email: 'chetan@example.com', avatar: 'https://via.placeholder.com/50' },
+          { id: 2, name: 'piyush', email: 'piyush@example.com', avatar: 'https://via.placeholder.com/50' },
+          { id: 3, name: 'sanket', email: 'sanket@example.com', avatar: 'https://via.placeholder.com/50' },
+          { id: 4, name: 'hero', email: 'hero@example.com', avatar: 'https://via.placeholder.com/50' }
+        ];
+
+        const filteredUsers = React.useMemo(() => {
+          return users.filter(user =>
+            user.name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }, [searchTerm, users]);
+
+        return (
+          <div className="container">
+            <h2>User Profiles</h2>
+            <input
+              type="text"
+              placeholder="Search by name..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            {filteredUsers.map(user => (
+              <UserProfile key={user.id} user={user} />
+            ))}
+          </div>
+        );
+      }
+
+   
+
+   const root = ReactDOM.createRoot(document.getElementById('root'));
+   root.render(<App/>)
+
+  </script>
+</html>
